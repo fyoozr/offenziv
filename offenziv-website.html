@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offenziv - Elite Cybersecurity Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #DC0000;
+            --dark-red: #8B0000;
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #CCCCCC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(220, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(220, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            opacity: 0.3;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.15; }
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-red);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(220, 0, 0, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 1.2;
+        }
+
+        .hero .tagline {
+            font-size: 1.8rem;
+            color: var(--primary-red);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: var(--light-gray);
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid var(--primary-red);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--primary-red);
+            border-color: var(--white);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            margin-bottom: 5rem;
+            font-weight: 300;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 3rem;
+            border: 2px solid var(--medium-gray);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 0, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(220, 0, 0, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+        }
+
+        .service-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+            transition: border-color 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: var(--primary-red);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-red);
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-red);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+            color: var(--white);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1.2rem 3rem;
+            background: var(--primary-red);
+            color: var(--white);
+            border: 2px solid var(--primary-red);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--primary-red);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .info-box {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-gray);
+            border: 2px solid var(--medium-gray);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .info-box h4 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-box p {
+            color: var(--light-gray);
+        }
+
+        /* Legal Section */
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-box {
+            background: var(--dark-gray);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-red);
+        }
+
+        .legal-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            text-transform: uppercase;
+        }
+
+        .legal-box p {
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .legal-box ul {
+            list-style-position: inside;
+            color: var(--light-gray);
+            line-height: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            border-top: 2px solid var(--primary-red);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .footer-text {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .copyright {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.4rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Offenziv</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#legal">Legal</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1></h1>
+                <p class="tagline">Elite Offensive Cybersecurity</p>
+                <p>We breach defenses before adversaries do. Through advanced penetration testing, red team operations, and strategic security consulting, we fortify your organization against evolving cyber threats.</p>
+                <a href="#contact" class="cta-button">Secure Your Systems</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Comprehensive offensive security solutions tailored to your organization</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive security assessments simulating real-world attack scenarios. We identify vulnerabilities in your infrastructure, applications, and networks before malicious actors can exploit them. Our methodology combines automated tools with manual testing techniques to ensure thorough coverage.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚔️</div>
+                    <h3>Red Team Operations</h3>
+                    <p>Advanced adversary simulation exercises that test your organization's detection and response capabilities. Our red team emulates sophisticated threat actors using tactics, techniques, and procedures (TTPs) observed in real-world breaches, providing invaluable insights into your security posture.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Security Consulting</h3>
+                    <p>Strategic guidance to strengthen your overall security program. We provide expert advice on security architecture, policy development, incident response planning, and regulatory compliance. Our consultants bring years of offensive security experience to help you build resilient defenses.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Vulnerability Assessment</h3>
+                    <p>Systematic identification and prioritization of security weaknesses across your digital assets. We conduct thorough scans and analysis of your systems, providing actionable remediation guidance with risk-based prioritization to maximize your security investment.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Application Security</h3>
+                    <p>Deep-dive security testing for web, mobile, and API applications. We identify logic flaws, injection vulnerabilities, authentication bypasses, and business logic issues that automated scanners miss. Secure your applications before deployment or identify risks in production systems.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Social Engineering</h3>
+                    <p>Assess your human defenses through controlled phishing campaigns, vishing exercises, and physical security assessments. We test your employees' security awareness and provide training recommendations to transform your workforce into your strongest security asset.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Offenziv</h2>
+            <p class="section-subtitle">Offensive security experts committed to protecting your organization</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Who We Are</h2>
+                    <p>Offenziv is a specialized cybersecurity firm focused exclusively on offensive security operations. Our team consists of certified ethical hackers, penetration testers, and security researchers with extensive experience in identifying and exploiting vulnerabilities across diverse environments.</p>
+                    
+                    <p>We believe that the best defense is a proactive offense. By thinking like attackers and employing the same tools and techniques used by threat actors, we help organizations discover and remediate security weaknesses before they can be exploited maliciously.</p>
+                    
+                    <p>Our approach combines technical expertise with strategic thinking, ensuring that our findings translate into meaningful security improvements for your organization. We don't just identify problems—we provide practical, actionable solutions.</p>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Security Assessments</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Ready to strengthen your security posture? Get in touch with our team</p>
+            
+            <div class="contact-content">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <div class="info-box">
+                        <div class="info-icon">📧</div>
+                        <h4>Email</h4>
+                        <p>contact@offenziv.com</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-icon">📞</div>
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-icon">📍</div>
+                        <h4>Location</h4>
+                        <p>Global Operations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="legal">
+        <div class="container">
+            <h2 class="section-title">Legal Information</h2>
+            <p class="section-subtitle">Transparency and compliance in all our operations</p>
+            
+            <div class="legal-content">
+                <div class="legal-box">
+                    <h3>Terms of Service</h3>
+                    <p>By engaging Offenziv's services, clients agree to the following terms:</p>
+                    <ul>
+                        <li>All security testing activities will be conducted within the agreed-upon scope and timeframe</li>
+                        <li>Clients must provide written authorization for all testing activities</li>
+                        <li>Testing will be conducted in accordance with industry best practices and applicable laws</li>
+                        <li>Findings will remain confidential and shared only with authorized personnel</li>
+                        <li>Offenziv assumes no liability for damages resulting from authorized testing activities</li>
+                    </ul>
+                </div>
+
+                <div class="legal-box">
+                    <h3>Privacy Policy</h3>
+                    <p>Offenziv is committed to protecting your privacy and handling your data responsibly:</p>
+                    <ul>
+                        <li>We collect only necessary information to provide our services effectively</li>
+                        <li>All client data is encrypted in transit and at rest</li>
+                        <li>We do not share, sell, or distribute client information to third parties</li>
+                        <li>Data is retained only as long as necessary for business purposes or legal requirements</li>
+                        <li>Clients have the right to request access, correction, or deletion of their data</li>
+                    </ul>
+                </div>
+
+                <div class="legal-box">
+                    <h3>Compliance & Certifications</h3>
+                    <p>Offenziv maintains the highest standards of professional conduct and technical expertise:</p>
+                    <ul>
+                        <li>Our team holds industry-recognized certifications (OSCP, CEH, GPEN, GWAPT)</li>
+                        <li>We follow OWASP, PTES, and OSSTMM testing methodologies</li>
+                        <li>All testing activities comply with applicable laws and regulations</li>
+                        <li>We maintain professional liability insurance for all engagements</li>
+                        <li>Regular internal audits ensure quality and consistency in our deliverables</li>
+                    </ul>
+                </div>
+
+                <div class="legal-box">
+                    <h3>Disclaimer</h3>
+                    <p>While Offenziv employs industry-leading methodologies and experienced professionals, security testing has inherent limitations. No assessment can guarantee the identification of all vulnerabilities or provide absolute assurance against future breaches. Our findings represent the security posture at the time of testing and may change as systems evolve. Clients remain responsible for implementing remediation measures and maintaining ongoing security practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Offenziv</div>
+            <p class="footer-text">Elite offensive security services for modern organizations</p>
+            
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">🔗</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="GitHub">💻</a>
+            </div>
+            
+            <p class="copyright">&copy; 2026 Offenziv. All rights reserved. | Ethical hacking and penetration testing services</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            this.reset();
+        });
+
+        // Add intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card, .stat-box, .info-box, .legal-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
